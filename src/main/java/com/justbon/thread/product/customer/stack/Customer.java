@@ -1,6 +1,5 @@
 package com.justbon.thread.product.customer.stack;
 
-import com.company.product.customer.ValueObject;
 
 /**
  * Created by mongo on 2018/8/11.
