@@ -9,6 +9,8 @@ import java.util.function.Predicate;
  * public interface Predicate<T>{
  *  boolean test(T t);
  * }
+ * java.util.function.Predicate<T>接口定义了一个名叫test的抽象方法，它接受泛型
+ * T对象，并返回一个boolean。这恰恰和你先前创建的一样，现在就可以直接使用了
  *
  */
 

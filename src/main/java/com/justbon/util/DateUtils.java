@@ -8,7 +8,6 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
 
-import com.sys.util.encryp.MD5;
 
 
 public class DateUtils {
@@ -998,13 +997,6 @@ public class DateUtils {
 	 */
 	public static void main(String[] args) throws Exception {
 
-		String currDate = DateUtils.getCurrDateStr();
-		System.out.println(currDate);
-		String userId = "kt102";
-		String token = MD5.getDigestedString(userId+currDate);
-		System.out.println(token);
-	
-		
-		
+
 	}
 }
