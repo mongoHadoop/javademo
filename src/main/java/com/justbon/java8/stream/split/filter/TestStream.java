@@ -1,14 +1,18 @@
-package com.justbon.java8.stream;
+package com.justbon.java8.stream.split.filter;
 
 import com.justbon.java8.stream.pojo.Dish;
 
 import java.util.Arrays;
 import java.util.List;
 
-import static java.util.Comparator.comparing;
 import static java.util.stream.Collectors.toList;
+
 public class TestStream {
 
+    /**
+     *  filter
+     * @param args
+     */
     public static void main(String[] args) {
 
         List<Dish> menu = Arrays.asList(
@@ -23,7 +27,7 @@ public class TestStream {
                 new Dish("salmon", false, 450, Dish.Type.FISH));
 
         List<String> threeHighCaloricDishNames = menu.parallelStream()
-                .filter(d -> d.getCalories() > 300)
+                .filter(Dish::isVegetarian)
                 .sorted((o1,o2)->Integer.compare(o1.getCalories(),o2.getCalories()))
 
                 .map(Dish::getName) .limit(3) .collect(toList());

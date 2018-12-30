@@ -16,6 +16,15 @@ import java.util.function.Consumer;
  *  void accept(T t);
  * }
  *
+ *
+ * 先来看lambda表达式的语法：
+ *
+ * () -> {}
+ * () : 括号就是接口方法的括号，接口方法如果有参数，也需要写参数。只有一个参数时，括号可以省略。
+ *
+ * -> : 分割左右部分的，没啥好讲的。
+ *
+ * {} : 要实现的方法体。只有一行代码时，可以不加括号，可以不写return。
  */
 public class TestConsumer {
 
