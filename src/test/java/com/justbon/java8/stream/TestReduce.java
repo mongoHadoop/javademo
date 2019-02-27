@@ -24,6 +24,7 @@ public class TestReduce {
         int sum = numbers.stream().reduce(0, (a, b) -> a + b);
         int sum2 = numbers.stream().reduce(0, Integer::sum);
         System.out.println(sum);
+        System.out.println(sum2);
         //相乘
         int product =numbers.stream().reduce(1, (a, b) -> a * b);
         System.out.println(product);
