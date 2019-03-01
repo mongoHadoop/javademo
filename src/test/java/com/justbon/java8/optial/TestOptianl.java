@@ -1,5 +1,4 @@
 package com.justbon.java8.optial;
-
 import org.junit.Test;
 
 import java.util.Optional;
