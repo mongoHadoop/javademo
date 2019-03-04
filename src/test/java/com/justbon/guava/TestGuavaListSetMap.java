@@ -1,4 +1,4 @@
-package com.justbon.java8.optial;
+package com.justbon.guava;
 
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Lists;
@@ -10,9 +10,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class TestGoogleOptional {
+public class TestGuavaListSetMap {
 
-/*
+
     @Test
     public void testOpt(){
         Map<String, Map<String, String>> map = Maps.newHashMap();
@@ -22,12 +22,12 @@ public class TestGoogleOptional {
 
         list1.forEach(e-> System.out.println(e));
     }
-    *//**
+    /**
      * Immutable Collections: 不可变的集合，还在使用 Collections.unmodifiableXXX()
      * Immutable Collections 这才是真正的不可修改的集合Immutable Collections:
      * 不可变的集合，还在使用 Collections.unmodifiableXXX()
      * Immutable Collections 这才是真正的不可修改的集合
-     *//*
+     */
 
     @Test
     public void testOpt2(){
@@ -37,5 +37,5 @@ public class TestGoogleOptional {
         Set<String> set = Sets.newHashSet("one","two","three");
         ImmutableSet<String> immutableSet2 = builder.add("RED").addAll(set).build();
         immutableSet2.forEach(e-> System.out.println(e));
-    }*/
+    }
 }
