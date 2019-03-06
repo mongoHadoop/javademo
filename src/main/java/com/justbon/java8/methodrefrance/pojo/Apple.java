@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class Apple {
-    private  int weight;
+    private  Integer weight;
     private String color;
     public  Apple(int weight){
         this.weight =weight;
@@ -17,4 +17,5 @@ public class Apple {
         this.color=color;
         this.weight=weight;
     }
+
 }
