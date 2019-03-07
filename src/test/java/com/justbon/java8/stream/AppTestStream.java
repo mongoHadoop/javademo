@@ -40,7 +40,7 @@ public class AppTestStream {
     }
 
     @Test
-    public void streamMapFilter2()
+    public void streamMapFilterLimit()
     {
 
         List<String> threeHighCaloricDishNames = menu.stream()
@@ -56,7 +56,7 @@ public class AppTestStream {
      *
      */
     @Test
-    public void streamMapDistinct()
+    public void streamFilterDistinct()
     {
 
 
@@ -73,7 +73,7 @@ public class AppTestStream {
      * 截短流
      */
     @Test
-    public void streamMapLimit()
+    public void streamFilterLimit()
     {
 
         List<String> dishes = menu.stream()
@@ -166,8 +166,6 @@ public class AppTestStream {
      * 这个方法的问题在于，传递给map方法的Lambda为每个单词返回了一个String[]（String
      * 列表）。因此， map 返回的流实际上是Stream<String[]> 类型的。你真正想要的是用
      * Stream<String>来表示一个字符流。图
-     *
-     *
      *
      * 一言以蔽之，flatmap方法让你把一个流中的每个值都换成另一个流，然后把所有的流连接
      * 起来成为一个流。

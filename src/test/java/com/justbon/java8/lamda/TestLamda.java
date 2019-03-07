@@ -17,6 +17,16 @@ import java.util.function.*;
 import static java.util.Comparator.comparing;
 import static java.util.stream.Collectors.toList;
 
+/**
+ *
+ *
+ *方法引用的简化模式:
+ (Apple a) -> a.getWeight() Apple::getWeight
+ () -> Thread.currentThread().dumpStack() Thread.currentThread()::dumpStack
+ (str, i) -> str.substring(i) String::substring
+ (String s) -> System.out.println(s) System.out::println
+ *
+ */
 public class TestLamda {
     List<Integer> weights = Lists.newArrayList(7, 3, 4, 10);
     @Test
@@ -169,7 +179,8 @@ public class TestLamda {
             Apple ap4 = ap3.apply("green", weight);
             return  ap4;
         }).collect(toList());
-        apples.forEach(e-> System.out.println(JSONObject.toJSONString(e)));
+        apples.stream().map(JSONObject::toJSONString).forEach(
+                System.out::println);
     }
 
     /**
@@ -235,6 +246,14 @@ public class TestLamda {
 
          return (Comparator<T> & Serializable)
            (c1, c2) -> keyExtractor.apply(c1).compareTo(keyExtractor.apply(c2));
+
+
+         例如：
+
+         (Apple a) -> a.getWeight() Apple::getWeight
+         () -> Thread.currentThread().dumpStack() Thread.currentThread()::dumpStack
+         (str, i) -> str.substring(i) String::substring
+         (String s) -> System.out.println(s) System.out::println
 
          */
 

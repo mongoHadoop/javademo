@@ -56,7 +56,7 @@ public class TestStreamGroup {
                     else return CaloricLevel.FAT;
                 } ));
 
-        System.out.println(dishesByCaloricLevel);
+        System.out.println("dish category:"+JSONObject.toJSONString(dishesByCaloricLevel));
 
     }
 
@@ -190,6 +190,7 @@ public class TestStreamGroup {
                                 else return CaloricLevel.FAT; },
                                 toCollection(HashSet::new) )));
         System.out.println(caloricLevelsByType2);
+
     }
 
 }

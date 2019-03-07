@@ -1,7 +1,11 @@
 package com.justbon.java8.optial;
+import com.justbon.App;
+import com.justbon.java8.methodrefrance.pojo.Apple;
 import org.junit.Test;
 
 import java.util.Optional;
+import java.util.function.Function;
+import java.util.function.Supplier;
 
 public class TestOptianl {
 
@@ -37,7 +41,7 @@ public class TestOptianl {
     }
 
     /**
-     * 如果我们创建的Optional对象中有值存在则返回此值，如果没有值存在，则会抛出
+     * 如果我们创建的Optional对象中有值存在则返回此值，如果没有值存在，则get()会抛出
      * NoSuchElementException异常。小demo如下：
      */
     @Test
@@ -49,7 +53,7 @@ public class TestOptianl {
     }
 
     /**
-     * 如果创建的Optional中有值存在，则返回此值，否则返回一个默认值
+     * 如果创建的Optional.orElse 中有值存在，则返回此值，否则返回一个默认值
      */
     @Test
     public void testorElse(){
@@ -79,7 +83,25 @@ public class TestOptianl {
 
         //ifPresent方法的参数是一个Consumer的实现类，Consumer类包含一个抽象方法，该抽象方法对传入的值进行处理，只处理没有返回值。
         Optional<String> stringOptional = Optional.of("zhangsan");
-        stringOptional.ifPresent(e-> System.out.println("我被处理了。。。"+e));
+        stringOptional.ifPresent(System.out::println);
 
+    }
+
+    /**
+     * 使用 map 从 Optional 对象中提取和转换值
+     *
+     * 从概念上，这与我们在第4章和第5章中看到的stream流的map方法相差无几。map操作会将提供的
+     * 函数应用于流的每个元素。你可以把Optional对象看成一种特殊的集合数据，它至多包含一个
+     * 元素。如果Optional包含一个值，那函数就将该值作为参数传递给map，对该值进行转换
+     */
+    @Test
+    public void testMap(){
+        Supplier<Apple> apple = Apple::new;
+        Apple a= apple.get();
+        a.setColor("green");
+
+        Optional<Apple> appleOptional = Optional.of(a);
+        Optional<String> color=appleOptional.map(Apple::getColor);
+        color.ifPresent(System.out::println);
     }
 }
