@@ -18,6 +18,16 @@ import static java.util.Comparator.comparing;
 import static java.util.stream.Collectors.toList;
 
 /**
+ * 可以把Lambda表达式理解为简洁地表示可传递的匿名函数的一种方式：它没有名称，但它
+ * 有参数列表、函数主体、返回类型，可能还有一个可以抛出的异常列表.
+ *
+ * Lambda表达式应用于函数式接口
+ *
+ * Java编译器会从上下文（目标类型 即函数式接口）推断出用什么函数式接
+ * 口来配合Lambda表达式，这意味着它也可以推断出适合Lambda的签名，因为函数描述符可以通
+ * 过目标类型来得到.
+ *
+ * 类型推断
  *
  *
  *方法引用的简化模式:
@@ -31,7 +41,7 @@ public class TestLamda {
     List<Integer> weights = Lists.newArrayList(7, 3, 4, 10);
     @Test
     /**
-     * Lambda表达式的签名与Comparator的函数描述符兼容。利用前面所述的方法，这个例子可
+     * Lambda表达式的签名与Comparator的函数描述符兼容.利用前面所述的方法，这个例子可
      * 以用方法引用改写成下面的样子
      *
      * 你的代码还能变得更易读一点吗？Comparator具有一个叫作comparing的静态辅助方法，
@@ -40,18 +50,31 @@ public class TestLamda {
      */
     public void testComparator(){
         List<String> str = Arrays.asList("a","b","A","B");
+        //s1 s2即 参数类型 推断
         str.sort((s1, s2) -> s1.compareToIgnoreCase(s2));
         /**
          *
          *  Comparator描述了
-         * 一个具有(T, T) -> int签名的函数描述符。你可以利用String类中的compareToIgnoreCase
-         * 方法来定义一个Lambda表达式（注意compareToIgnoreCase是String类中预先定义的）。
+         * 一个具有(T, T) -> int签名的函数描述符.你可以利用String类中的compareToIgnoreCase
+         * 方法来定义一个Lambda表达式（注意compareToIgnoreCase是String类中预先定义的）.
          *
          * 请注意，编译器会进行一种与Lambda表达式类似的类型检查过程，来确定对于给定的函数
          * 式接口这个方法引用是否有效：方法引用的签名必须和上下文类型匹配
          */
         str.sort(String::compareToIgnoreCase);
         str.forEach(e-> System.out.println(e));
+
+        /***
+         *
+         * 如果一个Lambda的主体是一个语句表达式，它就和一个返回void的函数描述符兼容（当
+         * 然需要参数列表也兼容）.例如，以下两行都是合法的，尽管List的add方法返回了一个
+         * boolean，而不是Consumer上下文（T -> void）所要求的void
+         */
+        // Predicate返回了一个boolean
+        Predicate<Integer> p = s -> weights.add(s);
+         // Consumer返回了一个void
+        Consumer<Integer> b = s -> weights.add(s);
+
     }
 
     @Test
@@ -60,11 +83,13 @@ public class TestLamda {
          Function<String, Integer> stringToInteger =
                 (String s) -> Integer.parseInt(s);
 
-        Function<String, Integer> stringToInteger1 = Integer::parseInt;
+        ToIntFunction<String> stringToInteger1 = Integer::parseInt;
         //apply 函数的意思是说 把T  当做输入,输出 R结果
-        System.out.println(stringToInteger1.apply("100"));
+        System.out.println(stringToInteger.apply("100"));
+
+        System.out.println(stringToInteger1.applyAsInt("100"));
       /**
-       (1) 这个Lambda表达式将其参数传给了Integer的静态方法parseInt。这种方法接受一个需要解析的String
+       (1) 这个Lambda表达式将其参数传给了Integer的静态方法parseInt.这种方法接受一个需要解析的String
         ,并返回一个Integer,（Lambda表达式调用静态方法）来重写Lambda表达式，如下所示：
         Function<String, Integer> stringToInteger = Integer::parseInt;
       **/
@@ -72,7 +97,71 @@ public class TestLamda {
     }
 
     /**
-     *  (2) 这个Lambda使用其第一个参数，调用其contains方法。由于第一个参数是List类型
+     *叫作拆箱（unboxing）.Java还有一个自动装箱机制来帮助程序员执行这一任务：装
+     *      * 箱和拆箱操作是自动完成的.比如，这就是为什么下面的代码是有效的（一个int被装箱成为
+     *      * Integer）：
+     *      * List<Integer> list = new ArrayList<>();
+     *      * for (int i = 300; i < 400; i++){
+     *      *  list.add(i);
+     *      * }
+     *      * 但这在性能方面是要付出代价的.
+     *      * Java 8为我们前面所说的函数式接口带来了一个专门的版本，以便在输入和输出都是原始类
+     *      * 型时避免自动装箱的操作.比如，在下面的代码中，使用IntPredicate就避免了对值1000进行
+     *      * 装箱操作，但要是用Predicate<Integer>就会把参数1000装箱到一个Integer对象中
+     * public interface IntPredicate{
+     *  boolean test(int t);
+     * }
+     *
+     * 一般来说，针对专门的输入参数类型的函数式接口的名称都要加上对应的原始类型前缀，比
+     * 如DoublePredicate、IntConsumer、LongBinaryOperator、IntFunction等.Function
+     * 接口还有针对输出参数类型的变种：ToIntFunction<T>、IntToDoubleFunction等
+     *
+     *
+     * Predicate<T> T->boolean IntPredicate,LongPredicate, DoublePredicate
+     * Consumer<T> T->void IntConsumer,LongConsumer, DoubleConsumer
+     * Function<T,R> T->R IntFunction<R>,
+     * IntToDoubleFunction,
+     * IntToLongFunction,
+     * LongFunction<R>,
+     * LongToDoubleFunction,
+     * LongToIntFunction,
+     * DoubleFunction<R>,
+     * ToIntFunction<T>,
+     * ToDoubleFunction<T>,
+     * ToLongFunction<T>
+     *
+     *  Supplier<T> ()->T BooleanSupplier,IntSupplier, LongSupplier,
+     * DoubleSupplier
+     * UnaryOperator<T> T->T IntUnaryOperator,
+     * LongUnaryOperator,
+     * DoubleUnaryOperator
+     * BinaryOperator<T> (T,T)->T IntBinaryOperator,
+     * LongBinaryOperator,
+     * DoubleBinaryOperator
+     * BiPredicate<L,R> (L,R)->boolean
+     * BiConsumer<T,U> (T,U)->void ObjIntConsumer<T>,
+     * ObjLongConsumer<T>,
+     * ObjDoubleConsumer<T>
+     * BiFunction<T,U,R> (T,U)->R ToIntBiFunction<T,U>,
+     * ToLongBiFunction<T,U>,
+     * ToDoubleBiFunction<T,U>
+     */
+    @Test
+    public void testUnboxing(){
+
+        IntPredicate evenNumbers = (int i) -> i % 2 == 0;//无装箱动作
+        evenNumbers.test(1000);
+
+        //自动装箱动作
+        Predicate<Integer> oddNumbers = (Integer i) -> i % 2 == 1;
+        oddNumbers.test(1000);
+
+        ToIntFunction<String> stringToInteger1 = Integer::parseInt;
+        System.out.println(stringToInteger1.applyAsInt("100"));
+    }
+
+    /**
+     *  (2) 这个Lambda使用其第一个参数，调用其contains方法.由于第一个参数是List类型
      *         的，你可以使用图3-5中的办法➋，如下所示：
      *         BiPredicate<List<String>, String> contains = List::contains;
      *         是因为，目标类型描述的函数描述符是 (List<String>,String) -> boolean，而
@@ -87,7 +176,7 @@ public class TestLamda {
 
         System.out.println(contains2.test(weights,3));
         /**
-         (2) 这个Lambda使用其第一个参数，调用其contains方法。由于第一个参数是List类型
+         (2) 这个Lambda使用其第一个参数，调用其contains方法.由于第一个参数是List类型
          的，你可以使用图3-5中的办法➋，如下所示：
          BiPredicate<List<String>, String> contains = List::contains;
          是因为，目标类型描述的函数描述符是 (List<String>,String) -> boolean，而
@@ -101,8 +190,8 @@ public class TestLamda {
      * 构造方法
      * 构造函数引用
      * 可以利用它的名称和关键字new来创建它的一个引用：
-     * ClassName::new。它的功能与指向静态方法的引用类似。例如，假设有一个构造函数没有参数。
-     * 它适合Supplier的签名() -> Apple。你可以这样做
+     * ClassName::new.它的功能与指向静态方法的引用类似.例如，假设有一个构造函数没有参数.
+     * 它适合Supplier的签名() -> Apple.你可以这样做
      */
 
     @Test
@@ -150,10 +239,10 @@ public class TestLamda {
      * 它就适合BiFunction接口的签名，于是你可以这样写
      *
      *
-     * 你已经看到了如何将有零个、一个、两个参数的构造函数转变为构造函数引用。那要怎么
+     * 你已经看到了如何将有零个、一个、两个参数的构造函数转变为构造函数引用.那要怎么
      * 样才能对具有三个参数的构造函数，比如Color(int, int, int)，使用构造函数引用呢？
      * 答案：你看，构造函数引用的语法是ClassName::new，那么在这个例子里面就是
-     * Color::new。但是你需要与构造函数引用的签名匹配的函数式接口。但是语言本身并没有提
+     * Color::new.但是你需要与构造函数引用的签名匹配的函数式接口.但是语言本身并没有提
      * 供这样的函数式接口，你可以自己创建一个：
      * public interface TriFunction<T, U, V, R>{
      *   R apply(T t, U u, V v);
@@ -185,6 +274,34 @@ public class TestLamda {
 
     /**
      * 综合例子
+     * 方法引用的演化来源
+     * 事实上，方法引用就是让你根据已有的方法实现来创建
+     * Lambda表达式.但是，显式地指明方法的名称，你的代码的可读性会更好.
+     *
+     * 方法引用可以被看作仅仅调用特定方法的Lambda的一种快捷
+     * 写法.它的基本思想是，如果一个Lambda代表的只是“直接调用这个方法”，那最好还是用名称
+     * 来调用它，而不是去描述如何调用它.
+     * 例如：
+     * Apple::getWeight就是引用了Apple类中定义的方法getWeight.请记住，不需要括号，因为
+     * 你没有实际调用这个方法.方法引用就是Lambda表达式(Apple a) -> a.getWeight()的快捷
+     * 写法.
+     *
+     * 1 指向静态方法的方法引用（例如Integer的parseInt方法，写作Integer::parseInt）
+     * 2 指向 任意类型实例方法 的方法引用（例如 String 的 length 方法，写作
+     * String::length）
+     * 3 指向现有对象的实例方法的方法引用（假设你有一个局部变量expensiveTransaction
+     * 用于存放Transaction类型的对象，它支持实例方法getValue，那么你就可以写expensive-Transaction::getValue）
+     * 例如：
+     * Lambda表达式
+     * ()->expensiveTransaction.getValue()可以写作expensiveTransaction::getValue
+     *
+     *  方法引用的等价Lambda表达式公式:
+     *  (args)->ClassName.staticMethod(args)====ClassName::staticMethod;
+     *
+     *  (arg0,rest)->arg0.instanceMethod(rest) ===ClassName::instanceMethod;
+     *  局部变量expensiveTransaction
+     *  (args)->expr.instanceMethod(args) ==expr::instanceMethod
+     *
      */
 
     @Test
@@ -208,7 +325,10 @@ public class TestLamda {
          *             (c1, c2) -> keyExtractor.apply(c1).compareTo(keyExtractor.apply(c2));
          *
          */
+
         Comparator<Apple> c = Comparator.comparing((Apple a) -> a.getWeight());
+        // (args)->ClassName.staticMethod(args)====ClassName::staticMethod;
+        Comparator<Apple> c1 = Comparator.comparing(Apple::getWeight);
 
         /**
          *
@@ -224,11 +344,11 @@ public class TestLamda {
          *
          *
          3.7.4 第 4 步：使用方法引用
-         前面解释过，方法引用就是替代那些转发参数的Lambda表达式的语法糖。你可以用方法引
+         前面解释过，方法引用就是替代那些转发参数的Lambda表达式的语法糖.你可以用方法引
          用让你的代码更简洁（假设你静态导入了java.util.Comparator.comparing）：
          inventory.sort(comparing(Apple::getWeight));
          恭喜你，这就是你的最终解决方案！这比Java 8之前的代码好在哪儿呢？它比较短；它的意
-         思也很明显，并且代码读起来和问题描述差不多：“对库存进行排序，比较苹果的重量。
+         思也很明显，并且代码读起来和问题描述差不多：“对库存进行排序，比较苹果的重量.
 
          comparing(Apple::getWeight)
          (arg0,rest)->arg0.instantMethod(rest);
@@ -268,10 +388,10 @@ public class TestLamda {
      *
      * 2. 比较器链
      * 上面说得都很好，但如果发现有两个苹果一样重怎么办？哪个苹果应该排在前面呢？你可能
-     * 需要再提供一个Comparator来进一步定义这个比较。比如，在按重量比较两个苹果之后，你可
-     * 能想要按原产国排序。thenComparing方法就是做这个用的。它接受一个函数作为参数（就像
+     * 需要再提供一个Comparator来进一步定义这个比较.比如，在按重量比较两个苹果之后，你可
+     * 能想要按原产国排序.thenComparing方法就是做这个用的.它接受一个函数作为参数（就像
      * comparing方法一样），如果两个对象用第一个Comparator比较之后是一样的，就提供第二个
-     * Comparator。你又可以优雅地解决这个问题了：
+     * Comparator.你又可以优雅地解决这个问题了：
      * inventory.sort(comparing(Apple::getWeight)
      *   .reversed()
      *   .thenComparing(Apple::getColor));
@@ -291,7 +411,7 @@ public class TestLamda {
      *
      * 3.8.2 谓词复合 Predicate就是 谓词
      * 谓词接口包括三个方法：negate、and和or，让你可以重用已有的Predicate来创建更复
-     * 杂的谓词。比如，你可以使用negate方法来返回一个Predicate的非，比如苹果不是红的：
+     * 杂的谓词.比如，你可以使用negate方法来返回一个Predicate的非，比如苹果不是红的：
      * Predicate<Apple> notRedApple = redApple.negate();
      * 你可能想要把两个Lambda用and方法组合起来，比如一个苹果既是红色又比较重：
      * Predicate<Apple> redAndHeavyApple =
@@ -302,7 +422,7 @@ public class TestLamda {
      *  .or(a -> "green".equals(a.getColor()));
      * 这一点为什么很好呢？从简单Lambda表达式出发，你可以构建更复杂的表达式，但读起来
      * 仍然和问题的陈述差不多！请注意，and和or方法是按照在表达式链中的位置，从左向右确定优
-     * 先级的。因此，a.or(b).and(c)可以看作(a || b) && c
+     * 先级的.因此，a.or(b).and(c)可以看作(a || b) && c
      */
 
     @Test
@@ -343,9 +463,9 @@ public class TestLamda {
 
     /**
      * .8.3 函数复合
-     * 最后，你还可以把Function接口所代表的Lambda表达式复合起来。
-     * Function接口为此配了andThen和compose两个默认方法，它们都会返回Function的一个实例。
-     * 1.andThen方法会返回一个函数，它先对输入应用一个给定函数，再对输出应用另一个函数。
+     * 最后，你还可以把Function接口所代表的Lambda表达式复合起来.
+     * Function接口为此配了andThen和compose两个默认方法，它们都会返回Function的一个实例.
+     * 1.andThen方法会返回一个函数，它先对输入应用一个给定函数，再对输出应用另一个函数.
      * 比如，假设有一个函数f给数字加1 (x -> x + 1)，另一个函数g给数字乘2，你可以将它们组
      * 合成一个函数h，先给数字加1，再给结果乘2：
      * Function<Integer, Integer> f = x -> x + 1;
@@ -353,13 +473,13 @@ public class TestLamda {
      * Function<Integer, Integer> h = f.andThen(g);
      * int result = h.apply(1);
      * 2 你也可以类似地使用compose方法，先把给定的函数用作compose的参数里面给的那个函
-     * 数，然后再把函数本身用于结果。比如在上一个例子里用compose的话，它将意味着f(g(x))，
+     * 数，然后再把函数本身用于结果.比如在上一个例子里用compose的话，它将意味着f(g(x))，
      * 而andThen则意味着g(f(x))：
      * Function<Integer, Integer> f = x -> x + 1;
      * Function<Integer, Integer> g = x -> x * 2;
      * Function<Integer, Integer> h = f.compose(g);
      * int result = h.apply(1);
-     * 图3-6说明了andThen和compose之间的区别。
+     * 图3-6说明了andThen和compose之间的区别.
      * 数学上会写作g(f(x))或
      * (g o f)(x)
      * 这将返回4
@@ -410,4 +530,17 @@ public class TestLamda {
         return function.apply(text);
     }
 
+    /**
+     * 使用局部变量
+     * 我们迄今为止所介绍的所有Lambda表达式都只用到了其主体里面的参数.但Lambda表达式
+     * 也允许使用自由变量（不是参数，而是在外层作用域中定义的变量），就像匿名类一样. 它们被
+     * 称作捕获Lambda.例如，下面的Lambda捕获了portNumber变量：
+     */
+
+    @Test
+    public void testLocalVar(){
+        final int portNumber = 1337;
+        Runnable r = () -> System.out.println(portNumber);
+        new Thread(r).start();
+    }
 }
