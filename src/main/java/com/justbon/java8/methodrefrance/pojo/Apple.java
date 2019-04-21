@@ -4,8 +4,18 @@ import lombok.Data;
 
 @Data
 public class Apple {
-    private  int weight;
+    private  Integer weight;
+    private String color;
     public  Apple(int weight){
         this.weight =weight;
     }
+
+    public Apple(){
+
+    }
+    public Apple(String color, Integer weight){
+        this.color=color;
+        this.weight=weight;
+    }
+
 }
