@@ -10,5 +10,6 @@ public class Bird extends Change {
     public void move() {
         // 代码
         System.out.println("Bird Move");
+        super.move();
     }
 }

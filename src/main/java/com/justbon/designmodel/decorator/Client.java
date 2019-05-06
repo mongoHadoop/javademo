@@ -9,7 +9,7 @@ public class Client {
         TheGreatestSage fish = new Fish(bird);
         // 第二种写法
         //TheGreatestSage fish = new Fish(new Bird(sage));
-        fish.move(); 
+        fish.move();
     }
 
 }

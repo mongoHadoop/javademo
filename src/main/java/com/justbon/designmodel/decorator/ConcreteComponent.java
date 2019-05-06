@@ -8,7 +8,7 @@ public class ConcreteComponent implements Component {
 
     @Override
     public void sampleOperation() {
-    	System.out.println("this ConcreteComponent do sampleOperation  ");
+    	System.out.println("this is init ConcreteComponent do sampleOperation  ");
     }
 
 }

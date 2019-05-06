@@ -15,7 +15,7 @@ public class Decorator implements Component{
     @Override
     public void sampleOperation() {
         // 委派给构件
-    	System.out.println("this is Decorator  add sampleOperation ");
+    	//System.out.println("this is Decorator  add sampleOperation ");
         component.sampleOperation();
     }
     

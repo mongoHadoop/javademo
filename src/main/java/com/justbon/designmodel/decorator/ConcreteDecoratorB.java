@@ -9,6 +9,12 @@ public class ConcreteDecoratorB extends Decorator {
     public ConcreteDecoratorB(Component component) {
         super(component);
     }
-    
 
+
+    @Override
+    public void sampleOperation() {
+        // 委派给构件
+        System.out.println("this is ConcreteDecoratorB  sampleOperation .. ");
+        super.sampleOperation();
+    }
 }
