@@ -3,7 +3,7 @@ package com.justbon.designmodel.strategy;
 /**
  * 3个策略具备了,需要一个装策略的锦囊
  */
-public class Context {
+public class Context implements IStrategy{
 
     private IStrategy iStrategy;
 
