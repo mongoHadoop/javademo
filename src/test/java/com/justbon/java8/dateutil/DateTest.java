@@ -2,11 +2,16 @@ package com.justbon.java8.dateutil;
 
 import org.junit.Test;
 
+import java.text.DecimalFormat;
+import java.text.Format;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoField;
 import java.time.temporal.ChronoUnit;
 import java.time.temporal.TemporalAdjusters;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import static org.junit.Assert.assertTrue;
 
@@ -179,4 +184,71 @@ public class DateTest {
         Date date4 = Date.from(instant);
 
     }
+
+    @Test
+    public  void translateDate2(){
+       int year =2019;
+       int month=4;
+        int q=4;
+        System.out.println(getQuarter(1));
+    }
+
+    public  static List<LocalDate> getPreLocalDateByMonth(int year, int month){
+        List<LocalDate>list = new ArrayList<>();
+        LocalDate today = LocalDate.now();
+        today=today.withYear(year).with(ChronoField.MONTH_OF_YEAR,month);
+        list.add(today);
+        LocalDate q1 =today.plusMonths(-3*1);
+        LocalDate q2 =today.plusMonths(-3*2);
+        LocalDate q3 =today.plusMonths(-3*3);
+        list.add(q1);
+        list.add(q2);
+        list.add(q3);
+        return list;
+    }
+    public int getQuarter(int m){
+        int quarter =0;
+        if (m >= 1 && m == 3) {
+            quarter = 1;
+        }if (m >= 4 && m <= 6) {
+            quarter = 2;
+        }
+        if (m >= 7 && m <= 9) {
+            quarter = 3;
+        }
+        if (m >= 10 && m <= 12)
+        {
+            quarter = 4;
+        }
+        return quarter;
+    }
+   public static List<LocalDate> getPreLocalDate(int year){
+       List<LocalDate>list = new ArrayList<>();
+       LocalDate today = LocalDate.now();
+       today=today.withYear(year);
+       list.add(today);
+       LocalDate q1 =today.plusMonths(-3*1);
+       LocalDate q2 =today.plusMonths(-3*2);
+       LocalDate q3 =today.plusMonths(-3*3);
+       list.add(q1);
+       list.add(q2);
+       list.add(q3);
+        return list;
+    }
+
+    public static List<LocalDate> getPreLocalDateByQuarter(int year,int quarter){
+        List<LocalDate>list = new ArrayList<>();
+        LocalDate today = LocalDate.now();
+        int month =quarter*3;
+        today=today.withYear(year).with(ChronoField.MONTH_OF_YEAR,month);;
+        list.add(today);
+        LocalDate q1 =today.plusMonths(-3*1);
+        LocalDate q2 =today.plusMonths(-3*2);
+        LocalDate q3 =today.plusMonths(-3*3);
+        list.add(q1);
+        list.add(q2);
+        list.add(q3);
+        return list;
+    }
+
 }
