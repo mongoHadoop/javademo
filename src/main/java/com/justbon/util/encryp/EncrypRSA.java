@@ -39,6 +39,28 @@ public class EncrypRSA {
 		}
 		return null;
 	}
+	/**
+	 * 加密
+	 * @param privateKey
+	 * @param srcBytes
+	 * @return
+	 * @throws NoSuchAlgorithmException
+	 * @throws NoSuchPaddingException
+	 * @throws InvalidKeyException
+	 * @throws IllegalBlockSizeException
+	 * @throws BadPaddingException
+	 */
+	protected byte[] encrypt(RSAPrivateKey privateKey,byte[] srcBytes) throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException{
+		if(privateKey!=null){
+			//Cipher负责完成加密或解密工作，基于RSA
+			Cipher cipher = Cipher.getInstance("RSA");
+			//根据公钥，对Cipher对象进行初始化
+			cipher.init(Cipher.ENCRYPT_MODE, privateKey);
+			byte[] resultBytes = cipher.doFinal(srcBytes);
+			return resultBytes;
+		}
+		return null;
+	}
 	
 	/**
 	 * 解密 
@@ -57,6 +79,29 @@ public class EncrypRSA {
 			Cipher cipher = Cipher.getInstance("RSA");
 			//根据公钥，对Cipher对象进行初始化
 			cipher.init(Cipher.DECRYPT_MODE, privateKey);
+			byte[] resultBytes = cipher.doFinal(srcBytes);
+			return resultBytes;
+		}
+		return null;
+	}
+
+	/**
+	 * 解密
+	 * @param publicKey
+	 * @param srcBytes
+	 * @return
+	 * @throws NoSuchAlgorithmException
+	 * @throws NoSuchPaddingException
+	 * @throws InvalidKeyException
+	 * @throws IllegalBlockSizeException
+	 * @throws BadPaddingException
+	 */
+	protected byte[] decrypt(RSAPublicKey publicKey,byte[] srcBytes) throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException{
+		if(publicKey!=null){
+			//Cipher负责完成加密或解密工作，基于RSA
+			Cipher cipher = Cipher.getInstance("RSA");
+			//根据公钥，对Cipher对象进行初始化
+			cipher.init(Cipher.DECRYPT_MODE, publicKey);
 			byte[] resultBytes = cipher.doFinal(srcBytes);
 			return resultBytes;
 		}
@@ -88,10 +133,10 @@ public class EncrypRSA {
 		
 		//用公钥加密
 		byte[] srcBytes = msg.getBytes("UTF-8");
-		byte[] resultBytes = rsa.encrypt(publicKey, srcBytes);
+		byte[] resultBytes = rsa.encrypt(privateKey, srcBytes);
 		
 		//用私钥解密
-		byte[] decBytes = rsa.decrypt(privateKey, resultBytes);
+		byte[] decBytes = rsa.decrypt( publicKey, resultBytes);
 		
 		System.out.println("明文是:" + msg);
 		System.out.println("加密后是:" + new BASE64Encoder().encode(resultBytes));
