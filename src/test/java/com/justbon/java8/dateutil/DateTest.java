@@ -36,7 +36,7 @@ public class DateTest {
     public void getTodayDate()
     {
         LocalDate todayDate = LocalDate.now();
-        System.out.println("今天的日期："+todayDate);
+        System.out.println("今天的日期："+todayDate.toString());
         LocalDate oneday  =todayDate;
         //取2016年10月的第1天
         LocalDate firstDay = oneday.with(TemporalAdjusters.firstDayOfMonth());
