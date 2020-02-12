@@ -8,10 +8,7 @@ import com.justbon.java8.methodrefrance.pojo.Apple;
 import org.checkerframework.checker.units.qual.A;
 import org.junit.Test;
 
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.*;
 
 import static java.util.Comparator.comparing;
@@ -311,7 +308,7 @@ public class TestLamda {
             BiFunction<String, Integer, Apple> ap3=Apple::new;
             Apple ap4 = ap3.apply("green", weight);
             return  ap4;
-        }).collect(toList());
+        }).skip(10).collect(toList());
 
         apples.sort((a1, a2) -> a1.getWeight().compareTo(a2.getWeight()));
 
@@ -542,5 +539,12 @@ public class TestLamda {
         final int portNumber = 1337;
         Runnable r = () -> System.out.println(portNumber);
         new Thread(r).start();
+    }
+
+    @Test
+    public void testNull(){
+        String s = "sss";
+        Predicate<String> predicate = Objects::nonNull;
+        System.out.println(predicate.test(s));
     }
 }

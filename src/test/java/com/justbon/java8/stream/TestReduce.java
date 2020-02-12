@@ -43,4 +43,17 @@ public class TestReduce {
         Optional<Integer> min = numbers.stream().reduce(Integer::min);
         min.ifPresent(e-> System.out.println(e));
     }
+
+    @Test
+    public void streamReduceMaxMin22()
+    {
+
+        for(int i=1;i<1000;i++){
+            System.out.println("...i.."+i);
+            while (i==5){
+               return;
+            }
+
+        }
+    }
 }

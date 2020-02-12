@@ -10,5 +10,6 @@ public class Fish extends Change {
     public void move() {
         // 代码
         System.out.println("Fish Move");
+        super.move();
     }
 }
