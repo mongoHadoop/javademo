@@ -105,6 +105,10 @@ public class DateTest {
         LocalDate today = LocalDate.now();
         LocalDate specifyDate = LocalDate.of(2015, 10, 20);
         System.out.println(today.isAfter(specifyDate)); //true
+        LocalDate yesterday = today.minus(1, ChronoUnit.DAYS);
+        if(yesterday.isBefore(today)){
+            System.out.println("之前的日期:"+yesterday);
+        }
     }
     /**
      * 处理不同时区的时间
@@ -250,5 +254,113 @@ public class DateTest {
         list.add(q3);
         return list;
     }
+    /**
+     * Java 8计算一年前或一年后的日期
+     */
+    @Test
+     public void addOrSubYear (){
+         LocalDate today = LocalDate.now();
+         LocalDate previousYear = today.minus(1, ChronoUnit.YEARS);
+         System.out.println("一年前的日期 : " + previousYear);
+         LocalDate nextYear = today.plus(1, ChronoUnit.YEARS);
+         System.out.println("一年后的日期:"+nextYear);
+     }
+    /**
+     * Java 8增加了一个Clock时钟类用于获取当时的时间戳
+     * ，或当前时区下的日期时间信息。
+     * 以前用到System.currentTimeInMillis()和TimeZone.getDefault()的地方都可用Clock替换。
+     */
+    @Test
+    public void clockDemo (){
+        // Returns the current time based on your system clock and set to UTC.
+        Clock clock = Clock.systemUTC();
+        System.out.println("Clock : " + clock.millis());
+        // Returns time based on system clock zone
+        Clock defaultClock = Clock.systemDefaultZone();
+        System.out.println("Clock : " + defaultClock.millis());
+    }
+    /**
+     * Java 8中处理时区
+     */
 
+    @Test
+    public void ZoneDateTimeDemo (){
+        // Date and time with timezone in Java 8
+        ZoneId america = ZoneId.of("America/New_York");
+        LocalDateTime localtDateAndTime = LocalDateTime.now();
+        ZonedDateTime dateAndTimeInNewYork  = ZonedDateTime.of(localtDateAndTime, america );
+        System.out.println("Current date and time in a particular timezone : " + dateAndTimeInNewYork);
+    }
+    /**
+     * 如何表示信用卡到期这类固定日期，答案就在YearMonth
+     */
+    @Test
+    public void YearMonthDemo (){
+        YearMonth currentYearMonth = YearMonth.now();
+        System.out.printf("Days in month year %s: %d%n", currentYearMonth, currentYearMonth.lengthOfMonth());
+        YearMonth creditCardExpiry = YearMonth.of(2019, Month.FEBRUARY);
+        System.out.printf("Your credit card expires on %s %n", creditCardExpiry);
+    }
+    /**
+     * 如何在Java 8中检查闰年
+     */
+    @Test
+    public void YearCheckDemo (){
+        LocalDate today = LocalDate.now();
+        if(today.isLeapYear()){
+            System.out.println("This year is Leap year");
+        }else {
+            System.out.println("2018 is not a Leap year");
+        }
+    }
+    /**
+     * 计算两个日期之间的天数和月数
+     */
+    @Test
+    public void PeriodDemo (){
+        LocalDate today = LocalDate.now();
+
+        LocalDate java8Release = LocalDate.of(2018, 12, 14);
+
+        Period periodToNextJavaRelease = Period.between(today, java8Release);
+        System.out.println("Months left between today and Java 8 release : "
+                + periodToNextJavaRelease.getMonths() );
+    }
+    /**
+     * 在Java 8中获取当前的时间戳v Instant
+     */
+    @Test
+    public void InstantDemo (){
+        Instant timestamp = Instant.now();
+        System.out.println("What is value of this instant " + timestamp.toEpochMilli());
+
+    }
+    /**
+     * Java 8中如何使用预定义的格式化工具去解析或格式化日期
+     */
+    @Test
+    public void formateDemo (){
+        String dayAfterTommorrow = "20180205";
+        LocalDate formatted = LocalDate.parse(dayAfterTommorrow,
+                DateTimeFormatter.BASIC_ISO_DATE);
+        System.out.println(dayAfterTommorrow+"  格式化后的日期为:  "+formatted);
+    }
+    /***
+     * 字符串互转日期类型
+     */
+    @Test
+    public void convertDemo (){
+        LocalDateTime date = LocalDateTime.now();
+
+        DateTimeFormatter format1 = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        //日期转字符串
+        String str = date.format(format1);
+
+        System.out.println("日期转换为字符串:"+str);
+
+        DateTimeFormatter format2 = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        //字符串转日期
+        LocalDate date2 = LocalDate.parse(str,format2);
+        System.out.println("日期类型:"+date2);
+    }
 }
