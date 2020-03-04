@@ -363,4 +363,19 @@ public class DateTest {
         LocalDate date2 = LocalDate.parse(str,format2);
         System.out.println("日期类型:"+date2);
     }
+
+
+    /**
+     * 把指定字符串格式化为日期
+     */
+    @Test
+    public void test6() {
+        String str1 = "2018-07-05 12:24:12";
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime localDateTime = LocalDateTime.parse(str1, dtf);
+        System.out.println(localDateTime);
+
+        long longtimestamp = localDateTime.toInstant(ZoneOffset.ofHours(8)).toEpochMilli();
+        System.out.printf("longtimestamp="+longtimestamp);
+    }
 }
