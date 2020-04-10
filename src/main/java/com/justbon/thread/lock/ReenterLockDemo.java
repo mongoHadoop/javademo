@@ -16,14 +16,14 @@ public class ReenterLockDemo implements Runnable{
     public ReenterLockDemo(ReentrantLock lock){
         this.lock=lock;
     }
-
+    public int sum=0;
     @Override
     public void run() {
-        for (int j=0;j<100000;j++){
+        for (int j=0;j<100;j++){
             lock.lock();
             try {
-                j++;
-                System.out.println(j);
+                sum++;
+                System.out.println(sum);
             }finally {
                 lock.unlock();
             }
