@@ -29,7 +29,7 @@ public class NIOClient {
     private static ByteBuffer receivebuffer = ByteBuffer.allocate(BLOCK);
     /*服务器端地址*/
     private final static InetSocketAddress SERVER_ADDRESS = new InetSocketAddress(
-            "localhost", 8888);
+            "127.0.0.1", 8888);
 
     public static void main(String[] args) throws IOException {
         // TODO Auto-generated method stub
