@@ -17,9 +17,15 @@
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
     <fastjson.version>1.2.47</fastjson.version>
+    <google-collections.version>1.0</google-collections.version>
   </properties>
 
   <dependencies>
+    <dependency>
+      <groupId>com.google.collections</groupId>
+      <artifactId>google-collections</artifactId>
+      <version>${google-collections.version}</version>
+    </dependency>
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
