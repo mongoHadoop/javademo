@@ -1,7 +1,6 @@
 package org.javacore.io;
 
 import java.io.*;
-
 /**
  * @author Jeff Lee
  * @since 2015-7-15 20:42:47
@@ -19,8 +18,10 @@ public class FormatteMemoryInput {
 					// 缓冲区字节输入
 					new ByteArrayInputStream(
 							BufferedInputFileT.read(filePath).getBytes()));
-			while(true)
+			while(true){
 				System.out.println((char)in.readByte());
+			}
+
 		} catch (EOFException e) {
 			System.out.println("End of Stream");
 		}

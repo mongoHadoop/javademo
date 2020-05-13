@@ -60,6 +60,41 @@
       <artifactId>aspectjweaver</artifactId>
       <version>1.8.13</version>
     </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>2.9.1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>1.7.25</version>
+    </dependency>
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+      <version>1.2.3</version>
+    </dependency>
+        <!--
+        lang包组织架构
+    复制代码
+     1 比较常用的工具类有
+     2
+     3 ArrayUtils:数组工具类，提供数组拷贝、查找、反转等功能
+     4 StringUtils:提供字符串操作，对null是安全的，字符串查找、替换、分割、去空格等操作
+     5 ObjectUtils:对null进行安全处理
+     6 RandomUtils:随机数工具类,获得随机整数、小数、字符串等
+     7 NumberUtils:数值工具类，数值类型转换等操作
+     8 DateUtils:日期工具类
+     9 EnumUtils:枚举工具类
+    10 ReflectionToStringBuilder/ToStringBuilder:重写toString方法
+    11 EqualsBuilder/HashCodeBuilder:提供了方便的方法来覆盖equals() 和hashCode()方法
+        -->
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+      <version>3.10</version>
+    </dependency>
   </dependencies>
 
   <build>

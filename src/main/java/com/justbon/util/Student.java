@@ -13,6 +13,25 @@ public class Student {
     int number;     //学号
     String className;    //班级
     List<String> hobby;    //爱好
+    int age;
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public String getProfileImageUrl() {
+        return profileImageUrl;
+    }
+
+    public void setProfileImageUrl(String profileImageUrl) {
+        this.profileImageUrl = profileImageUrl;
+    }
+
+    String profileImageUrl;
     
     public Student(){
     }
