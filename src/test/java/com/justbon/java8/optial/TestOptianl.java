@@ -33,9 +33,10 @@ public class TestOptianl {
         //为指定的值创建Optional对象，不管所传入的值为null不为null，创建的时候都不会报错
         Optional<String> nullOptional = Optional.ofNullable(null);
         nullOptional.ifPresent((o)-> System.out.println(o.toString()));
-
+        System.out.println(nullOptional.orElse("李四"));
         Optional<String> nullOptional2 = Optional.ofNullable("lisi");
         nullOptional2.ifPresent((o)-> System.out.println(o.toString()));
+        System.out.println(nullOptional2.orElse("李四"));
         //创建一个空的String类型的Optional对象
         Optional<String> emptyOptional = Optional.empty();
     }
@@ -59,7 +60,7 @@ public class TestOptianl {
     public void testorElse(){
         Optional<String> stringOptional = Optional.of("张三");
         System.out.println(stringOptional.orElse("zhangsan"));
-        Optional<String> emptyOptional = Optional.empty();
+        Optional<String> emptyOptional = Optional.ofNullable(null);
         System.out.println(emptyOptional.orElse("李四"));
     }
 
@@ -71,7 +72,7 @@ public class TestOptianl {
         Optional<String> stringOptional = Optional.of("张三");
         System.out.println(stringOptional.orElseGet(() -> "zhangsan"));
 
-        Optional<String> emptyOptional = Optional.empty();
+        Optional<String> emptyOptional = Optional.ofNullable(null);
         System.out.println(emptyOptional.orElseGet(() -> "orElseGet"));
     }
 
