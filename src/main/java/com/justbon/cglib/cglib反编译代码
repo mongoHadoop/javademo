@@ -1,0 +1,319 @@
+
+import java.lang.reflect.Method;
+import net.sf.cglib.core.ReflectUtils;
+import net.sf.cglib.core.Signature;
+import net.sf.cglib.proxy.*;
+
+//可以看到这个代理类是继承我们的目标类Dog，并且顺便实现了一个Factory接口，这个接口就是一些设置回调函数和返回实例化对象的方法
+public class Dog$$EnhancerByCGLIB$$fbca2ec6 extends Dog implements Factory{
+    //这里有很多的属性，仔细看一下就是一个方法对应两个，一个是Method类型，一个是MethodProxy类型
+    private boolean CGLIB$BOUND;
+    private static final ThreadLocal CGLIB$THREAD_CALLBACKS;
+    private static final Callback CGLIB$STATIC_CALLBACKS[];
+    private MethodInterceptor CGLIB$CALLBACK_0;
+    private static final Method CGLIB$eat$0$Method;
+    private static final MethodProxy CGLIB$eat$0$Proxy;
+    private static final Object CGLIB$emptyArgs[];
+    private static final Method CGLIB$finalize$1$Method;
+    private static final MethodProxy CGLIB$finalize$1$Proxy;
+    private static final Method CGLIB$equals$2$Method;
+    private static final MethodProxy CGLIB$equals$2$Proxy;
+    private static final Method CGLIB$toString$3$Method;
+    private static final MethodProxy CGLIB$toString$3$Proxy;
+    private static final Method CGLIB$hashCode$4$Method;
+    private static final MethodProxy CGLIB$hashCode$4$Proxy;
+    private static final Method CGLIB$clone$5$Method;
+    private static final MethodProxy CGLIB$clone$5$Proxy;
+
+    //静态代码块，调用下面静态方法，这个静态方法大概做的就是获取目标方法中每个方法的MethodProxy对象
+      static {
+          CGLIB$STATICHOOK1();
+      }
+
+    //无参构造器
+    public Dog$$EnhancerByCGLIB$$fbca2ec6()
+    {
+        CGLIB$BIND_CALLBACKS(this);
+    }
+
+    //此方法在上面的静态代码块中被调用
+    static void CGLIB$STATICHOOK1(){
+        //注意下面这两个Method数组，用于保存反射获取的Method对象，避免每次都用反射去获取Method对象
+        Method[] amethod;
+        Method[] amethod1;
+        CGLIB$THREAD_CALLBACKS = new ThreadLocal();
+        CGLIB$emptyArgs = new Object[0];
+
+        //获取目标类的字节码文件
+        Class class1 = Class.forName("com.wyq.day527.Dog$$EnhancerByCGLIB$$fbca2ec6");
+
+        //代理类的字节码文件
+        Class class2;
+
+        //ReflectUtils是一个包装各种反射操作的工具类，通过这个工具类来获取各个方法的Method对象，然后保存到上述的Method数组中
+        amethod = ReflectUtils.findMethods(new String[] {
+            "finalize", "()V", "equals", "(Ljava/lang/Object;)Z", "toString", "()Ljava/lang/String;", "hashCode", "()I", "clone", "()Ljava/lang/Object;"
+        }, (class2 = Class.forName("java.lang.Object")).getDeclaredMethods());
+        Method[] _tmp = amethod;
+
+        //为目标类的每一个方法都建立索引，可以想象成记录下来目标类中所有方法的地址，需要用调用目标类方法的时候根据地址就能直接找到该方法
+        //这就是此处CGLIB$xxxxxx$$Proxy的作用。。。
+        CGLIB$finalize$1$Method = amethod[0];
+        CGLIB$finalize$1$Proxy = MethodProxy.create(class2, class1, "()V", "finalize", "CGLIB$finalize$1");
+        CGLIB$equals$2$Method = amethod[1];
+        CGLIB$equals$2$Proxy = MethodProxy.create(class2, class1, "(Ljava/lang/Object;)Z", "equals", "CGLIB$equals$2");
+        CGLIB$toString$3$Method = amethod[2];
+        CGLIB$toString$3$Proxy = MethodProxy.create(class2, class1, "()Ljava/lang/String;", "toString", "CGLIB$toString$3");
+        CGLIB$hashCode$4$Method = amethod[3];
+        CGLIB$hashCode$4$Proxy = MethodProxy.create(class2, class1, "()I", "hashCode", "CGLIB$hashCode$4");
+        CGLIB$clone$5$Method = amethod[4];
+        CGLIB$clone$5$Proxy = MethodProxy.create(class2, class1, "()Ljava/lang/Object;", "clone", "CGLIB$clone$5");
+        amethod1 = ReflectUtils.findMethods(new String[] {
+            "eat", "()V"
+        }, (class2 = Class.forName("com.wyq.day527.Dog")).getDeclaredMethods());
+        Method[] _tmp1 = amethod1;
+        CGLIB$eat$0$Method = amethod1[0];
+        CGLIB$eat$0$Proxy = MethodProxy.create(class2, class1, "()V", "eat", "CGLIB$eat$0");
+    }
+
+    //这个方法就是调用目标类的的eat方法
+    final void CGLIB$eat$0()
+    {
+        super.eat();
+    }
+
+    //这个方法是我们是我们要调用的，在前面的例子中调用代理对象的eat方法就会到这个方法中
+    public final void eat(){
+        //CGLIB$CALLBACK_0 = (MethodInterceptor)callback;
+        CGLIB$CALLBACK_0;
+        //这里就是判断CGLIB$CALLBACK_0是否为空，也就是我们传入的方法拦截器是否为空，如果不为空就最终到下面的_L4
+        if(CGLIB$CALLBACK_0 != null) goto _L2; else goto _L1
+_L1:
+        JVM INSTR pop ;
+        CGLIB$BIND_CALLBACKS(this);
+        CGLIB$CALLBACK_0;
+_L2:
+        JVM INSTR dup ;
+        JVM INSTR ifnull 37;
+           goto _L3 _L4
+_L3:
+        break MISSING_BLOCK_LABEL_21;
+_L4:
+        break MISSING_BLOCK_LABEL_37;
+        this;
+        CGLIB$eat$0$Method;
+        CGLIB$emptyArgs;
+        CGLIB$eat$0$Proxy;
+        //这里就是调用方法拦截器的intecept（）方法
+        intercept();
+        return;
+        super.eat();
+        return;
+    }
+
+    //这里省略finalize，equals，toString，hashCode，clone,因为和上面的eat的两个方法差不多
+    //..........
+    //...........
+    //..........
+
+    public static MethodProxy CGLIB$findMethodProxy(Signature signature)
+    {
+        String s = signature.toString();
+        s;
+        s.hashCode();
+        JVM INSTR lookupswitch 6: default 140
+    //                   -1574182249: 68
+    //                   -1310345955: 80
+    //                   -508378822: 92
+    //                   1826985398: 104
+    //                   1913648695: 116
+    //                   1984935277: 128;
+           goto _L1 _L2 _L3 _L4 _L5 _L6 _L7
+_L2:
+        "finalize()V";
+        equals();
+        JVM INSTR ifeq 141;
+           goto _L8 _L9
+_L9:
+        break MISSING_BLOCK_LABEL_141;
+_L8:
+        return CGLIB$finalize$1$Proxy;
+_L3:
+        "eat()V";
+        equals();
+        JVM INSTR ifeq 141;
+           goto _L10 _L11
+_L11:
+        break MISSING_BLOCK_LABEL_141;
+_L10:
+        return CGLIB$eat$0$Proxy;
+_L4:
+        "clone()Ljava/lang/Object;";
+        equals();
+        JVM INSTR ifeq 141;
+           goto _L12 _L13
+_L13:
+        break MISSING_BLOCK_LABEL_141;
+_L12:
+        return CGLIB$clone$5$Proxy;
+_L5:
+        "equals(Ljava/lang/Object;)Z";
+        equals();
+        JVM INSTR ifeq 141;
+           goto _L14 _L15
+_L15:
+        break MISSING_BLOCK_LABEL_141;
+_L14:
+        return CGLIB$equals$2$Proxy;
+_L6:
+        "toString()Ljava/lang/String;";
+        equals();
+        JVM INSTR ifeq 141;
+           goto _L16 _L17
+_L17:
+        break MISSING_BLOCK_LABEL_141;
+_L16:
+        return CGLIB$toString$3$Proxy;
+_L7:
+        "hashCode()I";
+        equals();
+        JVM INSTR ifeq 141;
+           goto _L18 _L19
+_L19:
+        break MISSING_BLOCK_LABEL_141;
+_L18:
+        return CGLIB$hashCode$4$Proxy;
+_L1:
+        JVM INSTR pop ;
+        return null;
+    }
+
+    public static void CGLIB$SET_THREAD_CALLBACKS(Callback acallback[])
+    {
+        CGLIB$THREAD_CALLBACKS.set(acallback);
+    }
+
+    public static void CGLIB$SET_STATIC_CALLBACKS(Callback acallback[])
+    {
+        CGLIB$STATIC_CALLBACKS = acallback;
+    }
+
+    private static final void CGLIB$BIND_CALLBACKS(Object obj)
+    {
+        Dog$$EnhancerByCGLIB$$fbca2ec6 dog$$enhancerbycglib$$fbca2ec6 = (Dog$$EnhancerByCGLIB$$fbca2ec6)obj;
+        if(dog$$enhancerbycglib$$fbca2ec6.CGLIB$BOUND) goto _L2; else goto _L1
+_L1:
+        Object obj1;
+        dog$$enhancerbycglib$$fbca2ec6.CGLIB$BOUND = true;
+        obj1 = CGLIB$THREAD_CALLBACKS.get();
+        obj1;
+        if(obj1 != null) goto _L4; else goto _L3
+_L3:
+        JVM INSTR pop ;
+        CGLIB$STATIC_CALLBACKS;
+        if(CGLIB$STATIC_CALLBACKS != null) goto _L4; else goto _L5
+_L5:
+        JVM INSTR pop ;
+          goto _L2
+_L4:
+        (Callback[]);
+        dog$$enhancerbycglib$$fbca2ec6;
+        JVM INSTR swap ;
+        0;
+        JVM INSTR aaload ;
+        (MethodInterceptor);
+        CGLIB$CALLBACK_0;
+_L2:
+    }
+
+    public Object newInstance(Callback acallback[])
+    {
+        CGLIB$SET_THREAD_CALLBACKS(acallback);
+        CGLIB$SET_THREAD_CALLBACKS(null);
+        return new Dog$$EnhancerByCGLIB$$fbca2ec6();
+    }
+
+    public Object newInstance(Callback callback)
+    {
+        CGLIB$SET_THREAD_CALLBACKS(new Callback[] {
+            callback
+        });
+        CGLIB$SET_THREAD_CALLBACKS(null);
+        return new Dog$$EnhancerByCGLIB$$fbca2ec6();
+    }
+
+    public Object newInstance(Class aclass[], Object aobj[], Callback acallback[])
+    {
+        CGLIB$SET_THREAD_CALLBACKS(acallback);
+        JVM INSTR new #2   <Class Dog$$EnhancerByCGLIB$$fbca2ec6>;
+        JVM INSTR dup ;
+        aclass;
+        aclass.length;
+        JVM INSTR tableswitch 0 0: default 35
+    //                   0 28;
+           goto _L1 _L2
+_L2:
+        JVM INSTR pop ;
+        Dog$$EnhancerByCGLIB$$fbca2ec6();
+          goto _L3
+_L1:
+        JVM INSTR pop ;
+        throw new IllegalArgumentException("Constructor not found");
+_L3:
+        CGLIB$SET_THREAD_CALLBACKS(null);
+        return;
+    }
+
+    public Callback getCallback(int i)
+    {
+        CGLIB$BIND_CALLBACKS(this);
+        this;
+        i;
+        JVM INSTR tableswitch 0 0: default 30
+    //                   0 24;
+           goto _L1 _L2
+_L2:
+        CGLIB$CALLBACK_0;
+          goto _L3
+_L1:
+        JVM INSTR pop ;
+        null;
+_L3:
+        return;
+    }
+
+    public void setCallback(int i, Callback callback)
+    {
+        switch(i)
+        {
+        case 0: // '\0'
+            CGLIB$CALLBACK_0 = (MethodInterceptor)callback;
+            break;
+        }
+    }
+
+    public Callback[] getCallbacks()
+    {
+        CGLIB$BIND_CALLBACKS(this);
+        this;
+        return (new Callback[] {
+            CGLIB$CALLBACK_0
+        });
+    }
+
+    public void setCallbacks(Callback acallback[])
+    {
+        this;
+        acallback;
+        JVM INSTR dup2 ;
+        0;
+        JVM INSTR aaload ;
+        (MethodInterceptor);
+        CGLIB$CALLBACK_0;
+    }
+
+
+
+
+}
+复制代码

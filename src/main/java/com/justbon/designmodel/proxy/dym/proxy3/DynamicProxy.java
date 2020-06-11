@@ -12,6 +12,8 @@ import java.lang.reflect.Method;
     4 .  将对应的字节码转换为对应的class 对象；
     5.   创建InvocationHandler 实例handler，用来处理Proxy所有方法调用；
     6.   Proxy 的class对象 以创建的handler对象为参数，实例化一个proxy对象
+        DynamicProxy 是InvocationHandler的实现类，也就是处理器
+        代理对象执行被代理对象调用的地方
  */
 
 public class DynamicProxy implements InvocationHandler
@@ -19,7 +21,7 @@ public class DynamicProxy implements InvocationHandler
     //　这个就是我们要代理的真实对象
     private Object subject;
     
-    //    构造方法，给我们要代理的真实对象赋初值
+    // 构造方法，给我们要代理的真实对象赋初值
     public DynamicProxy(Object subject)
     {
         this.subject = subject;

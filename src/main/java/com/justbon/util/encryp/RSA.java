@@ -94,16 +94,21 @@ public class RSA {
         System.out.println("公钥:" + tos(publicKey.getEncoded()));
         System.out.println("私钥:" + tos(privateKey.getEncoded()));
         byte[] data = "你好，世界！".getBytes();
-        System.out.println("公钥加密-------私钥解密");
+        System.out.println("公钥加密--------------私钥解密");
         byte[] enc = encryptByPublicKey(data, publicKey.getEncoded());
+        System.out.println("加密前:" + new String(data));
+        System.out.println("加密后:" + tos(enc));
         byte[] dec = decryptByPrivateKey(enc, privateKey.getEncoded());
-        System.out.println("加密前:" + tos(data));
-        System.out.println("解密后:" + new String(dec));
-        System.out.println("私钥加密--------公钥解密");
+        System.out.println("-----私钥解密:------" + new String(dec));
+        System.out.println("--------------------------------------------------");
+
+        System.out.println("私钥加密----------------------公钥解密");
         enc = encryptByPrivateKey(data, privateKey.getEncoded());
         dec = decryptByPublicKey(enc, publicKey.getEncoded());
-        System.out.println("加密前:" + tos(data));
-        System.out.println("解密后:" + new String(dec));
+        System.out.println("加密前:" + new String(data));
+        System.out.println("加密后:" + tos(enc));
+        System.out.println("--------公钥解密:-------:" + new String(dec));
+
         System.out.println("私钥签名--------公钥验证签名");
         byte[] sign = sign(data, privateKey.getEncoded());
         boolean status = verify(data, publicKey.getEncoded(), sign);
