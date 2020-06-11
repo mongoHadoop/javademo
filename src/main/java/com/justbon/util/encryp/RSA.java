@@ -1,12 +1,8 @@
 package com.justbon.util.encryp;
 
-import java.security.KeyFactory;
-import java.security.KeyPair;
-import java.security.KeyPairGenerator;
-import java.security.NoSuchAlgorithmException;
-import java.security.PrivateKey;
-import java.security.PublicKey;
-import java.security.Signature;
+import org.apache.commons.codec.binary.Base64;
+
+import java.security.*;
 import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
 import java.security.spec.InvalidKeySpecException;
@@ -87,19 +83,24 @@ public class RSA {
     }
     public static void main(String[] args) throws Exception {
         KeyPairGenerator generator = KeyPairGenerator.getInstance(KEY_RSA);
-        // generator.initialize(1024);//默认为1024
+        generator.initialize(1024);//默认为1024
+/*        SecureRandom secrand = new SecureRandom();
+        secrand.setSeed("tmriPayment".getBytes()); // 初始化随机产生器*/
+
         KeyPair keyPair = generator.generateKeyPair();
         RSAPublicKey publicKey = (RSAPublicKey) keyPair.getPublic();
         RSAPrivateKey privateKey = (RSAPrivateKey) keyPair.getPrivate();
-        System.out.println("公钥:" + tos(publicKey.getEncoded()));
-        System.out.println("私钥:" + tos(privateKey.getEncoded()));
-        byte[] data = "你好，世界！".getBytes();
+        System.out.println("公钥:" + Base64.encodeBase64String(publicKey.getEncoded()));
+        System.out.println("私钥:" + Base64.encodeBase64String(privateKey.getEncoded()));
+        String str="你好，世界！";
+        byte[] data = str.getBytes();
+
         System.out.println("公钥加密--------------私钥解密");
         byte[] enc = encryptByPublicKey(data, publicKey.getEncoded());
         System.out.println("加密前:" + new String(data));
         System.out.println("加密后:" + tos(enc));
         byte[] dec = decryptByPrivateKey(enc, privateKey.getEncoded());
-        System.out.println("-----私钥解密:------" + new String(dec));
+        System.out.println("私钥解密后:" + new String(dec));
         System.out.println("--------------------------------------------------");
 
         System.out.println("私钥加密----------------------公钥解密");
@@ -107,11 +108,13 @@ public class RSA {
         dec = decryptByPublicKey(enc, publicKey.getEncoded());
         System.out.println("加密前:" + new String(data));
         System.out.println("加密后:" + tos(enc));
-        System.out.println("--------公钥解密:-------:" + new String(dec));
+        System.out.println("公钥解密后:" + new String(dec));
 
         System.out.println("私钥签名--------公钥验证签名");
         byte[] sign = sign(data, privateKey.getEncoded());
-        boolean status = verify(data, publicKey.getEncoded(), sign);
+        String sing64=Base64.encodeBase64String(sign);
+        byte[] decodesign64=Base64.decodeBase64(sing64);
+        boolean status = verify(data, publicKey.getEncoded(), decodesign64);
         System.out.println("签名:" + tos(sign));
         System.out.println("状态:" + status);
     }
