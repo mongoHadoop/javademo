@@ -9,6 +9,7 @@ import java.util.Arrays;
  * @Modified By：
  * @date 2020-11-09 下午3:37
  * @description
+ * 本质来说 优先队列的一个二叉堆实现
  */
 public class PriorityQueue {
 
