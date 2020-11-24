@@ -8,12 +8,12 @@ public class Test {
 
   public static void main(String[] args) {  
 
-      ElectricCar car = new ElectricCar();  
+      ElectricCar car = new ElectricCar();
       // 1.获取对应的ClassLoader  
-      ClassLoader classLoader = car.getClass().getClassLoader();  
+      ClassLoader classLoader = car.getClass().getClassLoader();
 
       // 2.获取ElectricCar 所实现的所有接口  
-      Class[] interfaces = car.getClass().getInterfaces();  
+      Class[] interfaces = car.getClass().getInterfaces();
       // 3.设置一个来自代理传过来的方法调用请求处理器，处理所有的代理对象上的方法调用  
       InvocationHandler handler = new InvocationHandlerImpl(car);  
       /**
@@ -22,10 +22,10 @@ public class Test {
           b.然后根据相应的字节码转换成对应的class，
           c.然后调用newInstance()创建实例
        */  
-      Object o = Proxy.newProxyInstance(classLoader, interfaces, handler);  
+      Object o = Proxy.newProxyInstance(classLoader, interfaces, handler);
       Vehicle vehicle = (Vehicle) o;  
       vehicle.drive();  
       Rechargable rechargeable = (Rechargable) o;  
-      rechargeable.recharge();  
+      rechargeable.recharge();
   }  
 }  
