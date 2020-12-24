@@ -8,7 +8,7 @@ import java.util.Arrays;
  * @file MergeSort.java
  * @Modified By：
  * @date 2020-12-02 上午10:30
- * @description
+ * @description 并归排序
  */
 public class MergeSort2 {
     public static void main(String []args){
