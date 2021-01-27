@@ -25,6 +25,7 @@ public class Product {
                 String value = System.currentTimeMillis() + "_"
                         + System.nanoTime();
                 ValueObject.value = value;
+                lock="xxx";
                 lock.notifyAll();
             }
 

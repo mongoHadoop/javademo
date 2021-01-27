@@ -8,7 +8,7 @@ package com.justbon.thread.product.customer.mutiProCustFix;
  */
 public class Main {
     public static void main(String[] args) throws InterruptedException{
-        String lock = new String();
+        String lock = new String("refresh");
         Customer customer = new Customer(lock);
         Product product = new Product(lock);
 
