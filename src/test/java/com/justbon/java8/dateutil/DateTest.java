@@ -260,6 +260,7 @@ public class DateTest {
     @Test
      public void addOrSubYear (){
          LocalDate today = LocalDate.now();
+        System.out.println(today.toString());
          LocalDate previousYear = today.minus(1, ChronoUnit.YEARS);
          System.out.println("一年前的日期 : " + previousYear);
          LocalDate nextYear = today.plus(1, ChronoUnit.YEARS);

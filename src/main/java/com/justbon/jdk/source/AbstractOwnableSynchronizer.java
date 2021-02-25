@@ -54,7 +54,7 @@ public abstract class AbstractOwnableSynchronizer
     private static final long serialVersionUID = 3737899427754241961L;
 
     /**
-     * Empty constructor for use by subclasses.
+     * Empty constructogr for use by subclasses.
      */
     protected AbstractOwnableSynchronizer() { }
 

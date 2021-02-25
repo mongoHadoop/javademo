@@ -10,7 +10,6 @@ public class Test {
 
       ElectricCar car = new ElectricCar();
       // 1.获取对应的ClassLoader  
-      ClassLoader classLoader = car.getClass().getClassLoader();
 
       // 2.获取ElectricCar 所实现的所有接口  
       Class[] interfaces = car.getClass().getInterfaces();
@@ -22,7 +21,7 @@ public class Test {
           b.然后根据相应的字节码转换成对应的class，
           c.然后调用newInstance()创建实例
        */  
-      Object o = Proxy.newProxyInstance(classLoader, interfaces, handler);
+      Object o = Proxy.newProxyInstance(handler.getClass().getClassLoader(), interfaces, handler);
       Vehicle vehicle = (Vehicle) o;  
       vehicle.drive();  
       Rechargable rechargeable = (Rechargable) o;  
