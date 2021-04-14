@@ -1,6 +1,7 @@
 package com.justbon.algorithm.structor.array;
 
-import org.omg.CORBA.Object;
+
+import java.util.Arrays;
 
 /**
  * @author ganli
@@ -8,7 +9,7 @@ import org.omg.CORBA.Object;
  * @file MyArray.java
  * @Modified By：
  * @date 2020-11-02 上午11:07
- * @description
+ * @description 数组插入元素
  */
 public class MyArray <E>{
     private int [] array;
@@ -28,6 +29,9 @@ public class MyArray <E>{
 
             throw new IndexOutOfBoundsException("超出数组实际元 素范围！");
         }
+        if(size>=array.length){
+            resize();
+        }
         //从右向左循环，将元素逐个向右挪1位
         for(int i=size-1; i>=index; i--){
             array[i+1] = array[i];
@@ -40,11 +44,43 @@ public class MyArray <E>{
         for(int i=0; i<size; i++){
             System.out.println(array[i]);
         }
+        System.out.println(size);
     }
+    public void resize(){
+        int[] array2=Arrays.copyOf(array,array.length*2);
+        array=array2;
+    }
+
+    public int delete (int index) throws  Exception{
+
+        if(index<0||index>=size){
+            throw new IndexOutOfBoundsException("超出数组实际元 素范围！");
+        }
+        int delItem=array[index];
+        //从左边向右移动,将元素一个个向左边移动1位
+        for(int i=index;i<size-1;i++){
+            array[i]=array[i+1];
+        }
+        size--;
+        return delItem;
+    }
+
     public static void main(String[] args) throws Exception {
         MyArray myArray = new MyArray(10);
         myArray.insert(3,0);
 
+        myArray.insert(7,1);
+        myArray.insert(9,2);
+        myArray.insert(5,3);
+        myArray.insert(6,1);
+        myArray.insert(7,1);
+        myArray.insert(9,2);
+        myArray.insert(5,3);
+        myArray.insert(6,1);
+        myArray.insert(7,1);
+        myArray.insert(9,2);
+        myArray.insert(5,3);
+        myArray.insert(6,1);
         myArray.insert(7,1);
         myArray.insert(9,2);
         myArray.insert(5,3);
