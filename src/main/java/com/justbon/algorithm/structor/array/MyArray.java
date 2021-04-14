@@ -86,5 +86,9 @@ public class MyArray <E>{
         myArray.insert(5,3);
         myArray.insert(6,1);
         myArray.output();
+        /**
+         * 数组这种数据结构 有非常高效的随机访问能力,只要给出index就可以找到对应元素
+         * 至于缺点 体现在插入和删除元素,会导致列表元素,被迫一个个移动,影响效率
+         */
     }
 }
