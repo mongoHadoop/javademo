@@ -1,6 +1,5 @@
 package com.justbon.algorithm.structor.linkedlist;
 
-import java.util.LinkedList;
 
 /**
  * @author ganli
@@ -8,7 +7,7 @@ import java.util.LinkedList;
  * @file MyLinkedList.java
  * @Modified By：
  * @date 2020-11-02 上午10:26
- * @description
+ * @description 链表结构
  */
 public class MyLinkedList {
 
@@ -68,7 +67,7 @@ public class MyLinkedList {
         }
     }
 
-    private  static class Node<E> {
+    private    static class Node<E> {
         E item;
         Node<E> next;
         Node(E element, Node<E> next) {
