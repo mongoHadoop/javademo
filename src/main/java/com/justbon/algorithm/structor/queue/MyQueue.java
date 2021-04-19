@@ -6,11 +6,13 @@ package com.justbon.algorithm.structor.queue;
  * @file MyQueue.java
  * @Modified By：
  * @date 2020-11-02 上午11:50
- * @description
+ * @description 队列实现
  */
 public class MyQueue {
     private int[] array;
+    //头元素
     private int front;
+    //尾元素
     private int rear;
 
     public  MyQueue(int capacity){
@@ -25,6 +27,7 @@ public class MyQueue {
             throw  new Exception("队列已满");
         }
         array[rear]=element;
+        //利用此求余函数 让尾指针周期循环起来, 这样就是循环队列
         rear=(rear+1)%array.length;
     }
 
@@ -33,6 +36,7 @@ public class MyQueue {
             throw  new Exception("队列已空");
         }
         int deQueueElement=array[front];
+        //让头指针动起来,循环起来
         front=(front+1)%array.length;
         return deQueueElement;
     }
@@ -64,5 +68,6 @@ public class MyQueue {
         myQueue.outPut();
         System.out.println("front:"+myQueue.front);
         System.out.println("rear:"+myQueue.rear);
+        //System.out.println(2/5);
     }
 }

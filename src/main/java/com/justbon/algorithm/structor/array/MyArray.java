@@ -25,7 +25,7 @@ public class MyArray <E>{
     public void insert(int element, int index) throws Exception {
 
         //判断访问下标是否超出范围
-        if(index<0 || index>size){
+        if(index<0 || index>array.length){
 
             throw new IndexOutOfBoundsException("超出数组实际元 素范围！");
         }
@@ -67,7 +67,7 @@ public class MyArray <E>{
 
     public static void main(String[] args) throws Exception {
         MyArray myArray = new MyArray(10);
-        myArray.insert(3,0);
+        //myArray.insert(3,0);
 
         myArray.insert(7,1);
         myArray.insert(9,2);
