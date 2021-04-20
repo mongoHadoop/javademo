@@ -9,7 +9,13 @@ import java.util.Arrays;
  * @Modified By：
  * @date 2020-11-09 下午3:37
  * @description
- * 本质来说 优先队列的一个二叉堆实现
+ * 本质来说 优先队列的一个二叉堆实现, 是用数组来存储的 二叉数
+ * 左边节点在数组中的leftchild_index= 2*parent_index+1
+ * 右边节点在数组中的rightchild_index= 2*parent_index+2
+ *
+ * f反过来 左边节点的index leftchild_index=>
+ * 父节点的下标 parent_index=(leftchild_index-1)/2
+ * 同理右边 
  */
 public class PriorityQueue {
 

@@ -43,7 +43,7 @@ public class BinaryTree {
         if(node==null){
             return;
         }
-        System.out.println(node.data);
+        System.out.print(node.data);
         preOrderTraveral(node.leftChild);
         preOrderTraveral(node.rightChild);
     }
@@ -57,15 +57,17 @@ public class BinaryTree {
     public  static  void  inOrderTraveral(TreeNode node ){
 
         if(node==null){
+         //   System.out.println("");
             return;
         }
         inOrderTraveral(node.leftChild);
-        System.out.println(node.data);
+        System.out.print(node.data);
         inOrderTraveral(node.rightChild);
 
     }
 
     /**
+     * 后序遍历
      *  左子树 右子树 根节点
      * @param node
      */
@@ -75,7 +77,7 @@ public class BinaryTree {
         }
         postOrderTraveral(node.leftChild);
         preOrderTraveral(node.rightChild);
-        System.out.println(node.data);
+        System.out.print(node.data);
     }
 
 
@@ -95,8 +97,10 @@ public class BinaryTree {
         TreeNode treeNode = createBinaryTree(inputList);
         System.out.println("前序遍历");
         preOrderTraveral(treeNode);
+        System.out.print("\n");
         System.out.println("中序遍历");
         inOrderTraveral(treeNode);
+        System.out.print("\n");
         System.out.println("后序遍历");
         postOrderTraveral(treeNode);
 

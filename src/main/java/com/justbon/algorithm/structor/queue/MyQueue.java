@@ -6,7 +6,7 @@ package com.justbon.algorithm.structor.queue;
  * @file MyQueue.java
  * @Modified By：
  * @date 2020-11-02 上午11:50
- * @description 队列实现
+ * @description 队列实现 数组实现
  */
 public class MyQueue {
     private int[] array;

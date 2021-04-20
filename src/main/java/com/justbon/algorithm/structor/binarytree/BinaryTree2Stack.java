@@ -95,14 +95,14 @@ public class BinaryTree2Stack {
                 10,null,null,8,null,4));
 
       TreeNode treeNode = createBinaryTree(inputList);
-        /*  System.out.println("前序遍历");
-        preOrderTraveral(treeNode);
-        System.out.println("中序遍历");
-        inOrderTraveral(treeNode);
-        System.out.println("后序遍历");
-        postOrderTraveral(treeNode);*/
+//          System.out.println("前序遍历");
+//        preOrderTraveral(treeNode);
+//        System.out.println("中序遍历");
+//        inOrderTraveral(treeNode);
+//        System.out.println("后序遍历");
+//        postOrderTraveral(treeNode);
 
-        //preOrderTravlerWithStack(treeNode);
+        preOrderTravlerWithStack(treeNode);
         levelOrderTraversal(treeNode);
     }
 
