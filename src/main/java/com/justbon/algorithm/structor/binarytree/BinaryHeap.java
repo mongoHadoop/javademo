@@ -109,7 +109,7 @@ public class BinaryHeap {
         upAdjust(arr02);
         System.out.println(Arrays.toString(arr02));
         // 删除一个数据，册数下沉操作
-        int[] arr03 = {3, 8, 7, 4, 6, 6, 6, 2, 3, 5};
+        int[] arr03 = {1, 8, 7, 4, 6, 0, 61, 2, 3, 5};
         downAdjust(0, arr03);
         System.out.println(Arrays.toString(arr03));
     }

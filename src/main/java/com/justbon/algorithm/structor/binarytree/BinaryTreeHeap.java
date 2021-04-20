@@ -28,6 +28,10 @@ import java.util.Stack;
  * 假设一个父节点的下标是parent，那么它的左孩子节点下标就 是2×parent + 1 ；右孩子节点下标就是2×parent + 2 。
  * 反过来，假设一个左孩子节点的下标是leftChild，那么它的父节点下标 就是（leftChild-1）/ 2 。
  * 假如节点4在数组中的下标是3，节点4是节点2的左孩子，节点2的下标 可以直接通过计算得出。 节点2的下标 = (3-1)/2 = 1
+ *
+ *
+ * 二叉堆的实现 只能利用数组来实现
+ *
  */
 public class BinaryTreeHeap {
 
@@ -58,6 +62,7 @@ public class BinaryTreeHeap {
     public static void downAdjust(int index, int[] array) {
         // 先记录父节点及左子节点的下标
         int parentIndex = index;
+        //左边节点
         int childrenIndex = 2 * parentIndex + 1;
         // 记录父节点的值，用于最后赋值
         int temp = array[parentIndex];
